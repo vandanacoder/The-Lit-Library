@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lit Library | Contact Us</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <h1><a href="index.html">The Lit Library</a></h1>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="book.html">Books</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li><a href="contact.html">Contact us</a></li>
+  </ul>
+</nav>
+
+<section class="contact-section">
+  <h1>Contact</h1>
+  <p class="contact-intro">The Lit Library is a personal, learning-focused project built for readers who appreciate thoughtful literature and clean digital spaces. If you have ideas, feedback, or book recommendations, your message is always welcome.</p>
+
+  <div class="contact-info">
+    <h2>Get in Touch</h2>
+    <p><strong>Email:</strong> litlibrary.contact@gmail.com</p>
+    <p><strong>Project Type:</strong> Personal / Educational</p>
+    <p><strong>Focus Areas:</strong> Literature, Web Design, Frontend Development</p>
+    <p><strong>Status:</strong> Actively evolving</p>
+  </div>
+
+  <h2>What You Can Contact Me About</h2>
+  <ul class="contact-extra-ul">
+    <li>Book suggestions or reading recommendations</li>
+    <li>Feedback on website design or usability</li>
+    <li>Ideas for new features or sections</li>
+    <li>General thoughts on literature and storytelling</li>
+  </ul>
+
+  <h2>Send a Message</h2>
+  <form class="contact-form" id="contactForm">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  <div class="contact-note">
+    <p>This contact form is currently part of the frontend design and does not store or send messages to a server. Backend integration may be added in future updates as the project grows.</p>
+    <p>Thank you for visiting The Lit Library and taking the time to explore stories that continue to inspire readers across generations.</p>
+  </div>
+</section>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("Thank you for your message! (Demo mode - backend coming soon)");
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
