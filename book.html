@@ -1,57 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Lit Library | Books</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lit Library | Books</title>
+  <meta name="description" content="Browse The Lit Library's curated collection — search by title, author, or genre.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <h1><a href="index.html">The Lit Library</a></h1>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="book.html">Books</a></li>
-    <li><a href="about.html">About us</a></li>
-    <li><a href="contact.html">Contact us</a></li>
-  </ul>
+<!-- ===== NAVIGATION ===== -->
+<nav role="navigation" aria-label="Main navigation">
+  <h1><a href="index.html" aria-label="The Lit Library Home">The Lit Library</a></h1>
+  <div class="nav-controls">
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="books.html" class="active" aria-current="page">Books</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-rl-btn" id="rl-toggle-btn" aria-label="Open reading list">
+      📚
+      <span class="rl-count" id="rl-count" aria-live="polite" style="display:none">0</span>
+    </button>
+    <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<section class="book-wholebody">
+<!-- ===== READING LIST PANEL ===== -->
+<aside class="reading-list-panel" id="reading-list-panel" aria-label="Reading list">
+  <div class="rl-header">
+    <h3>📚 Reading List</h3>
+    <button class="rl-close" id="rl-close" aria-label="Close reading list">✕</button>
+  </div>
+  <div class="rl-list" id="rl-list">
+    <p class="rl-empty">No books added yet. Click "+ List" on any card!</p>
+  </div>
+</aside>
+
+<!-- ===== BOOK MODAL ===== -->
+<div class="book-modal-overlay" id="book-modal" role="dialog" aria-modal="true" aria-label="Book details">
+  <div class="book-modal-inner">
+    <button class="modal-close" id="modal-close" aria-label="Close book details">✕</button>
+    <div class="modal-body">
+      <img class="modal-cover" id="modal-cover" src="" alt="">
+      <div class="modal-info">
+        <h2 id="modal-title"></h2>
+        <p class="modal-author" id="modal-author"></p>
+        <span class="modal-genre-badge" id="modal-genre"></span>
+        <div class="modal-stars" id="modal-stars" aria-label="Rating"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-quote" id="modal-quote"></div>
+        <div class="modal-why">
+          <strong>Why readers love this book</strong>
+          <span id="modal-why"></span>
+        </div>
+        <div class="modal-actions">
+          <button class="btn read-more-btn" id="modal-rl-btn" aria-label="Add to reading list">+ Reading List</button>
+          <button class="btn" id="modal-fav-btn" aria-label="Add to favorites">♡ Favorite</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="book-wholebody">
+
   <div class="h1-p">
     <h1 class="book-h1">Explore Our Collection</h1>
     <p class="book-p">A carefully curated space for readers who love stories, ideas, and timeless literature. Discover books across genres — fiction, classics, poetry, philosophy, and more.</p>
   </div>
 
-  <section class="books-grid">
-    <div class="book-card"><img src="https://i.postimg.cc/NMpSVXN5/61Hkdy-Bp-KOL-AC-UF1000-1000-QL80.jpg" alt="1984"><div class="book-card-three"><h3>1984</h3><p class="author">George Orwell</p><p class="desc">A dystopian novel about surveillance.</p><span class="genre">Dystopian</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/qBtPnPdh/7134u8y-D1YL-UF1000-1000-QL80.jpg" alt="Pride and Prejudice"><div class="book-card-three"><h3>Pride and Prejudice</h3><p class="author">Jane Austen</p><p class="desc">A classic romance exploring society.</p><span class="genre">Romance</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/fRNW8x7h/71YF1h-HLw7L.jpg" alt="The Great Gatsby"><div class="book-card-three"><h3>The Great Gatsby</h3><p class="author">F. Scott Fitzgerald</p><p class="desc">Wealth and broken dreams.</p><span class="genre">Classic</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/4N8w55Rg/Another-Book-cover-or-Poster-for-To-Kill-a-Mockingbird.jpg" alt="To Kill a Mockingbird"><div class="book-card-three"><h3>To Kill a Mockingbird</h3><p class="author">Harper Lee</p><p class="desc">Justice, morality, and empathy.</p><span class="genre">Classic</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/T2trM37N/Bookish-Literature.jpg" alt="The Catcher in the Rye"><div class="book-card-three"><h3>The Catcher in the Rye</h3><p class="author">J.D. Salinger</p><p class="desc">Teenage alienation.</p><span class="genre">Coming-of-Age</span></div></div>
-    <div class="book-card"><img src="https://i.pinimg.com/1200x/6d/df/b4/6ddfb43335137ffec54449ed6019b467.jpg" alt="Frankenstein"><div class="book-card-three"><h3>Frankenstein</h3><p class="author">Mary Shelley</p><p class="desc">Creation and responsibility.</p><span class="genre">Gothic</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/jSSf80Qp/Book.jpg" alt="The Alchemist"><div class="book-card-three"><h3>The Alchemist</h3><p class="author">Paulo Coelho</p><p class="desc">Destiny and dreams.</p><span class="genre">Philosophical</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/YC046NtH/Crime-And-Punishment-by-Fyodor-Dostoyevsky-Indigo-Chapters.jpg" alt="Crime and Punishment"><div class="book-card-three"><h3>Crime and Punishment</h3><p class="author">Dostoevsky</p><p class="desc">Guilt and morality.</p><span class="genre">Psychological</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/kGZFbW4X/Jane-Eyre-(Charlotte-Bronte).jpg" alt="Jane Eyre"><div class="book-card-three"><h3>Jane Eyre</h3><p class="author">Charlotte Brontë</p><p class="desc">Independence and love.</p><span class="genre">Gothic Romance</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/j2JnBmxT/Wuthering-Heights-by-Emily-Bronte.jpg" alt="Wuthering Heights"><div class="book-card-three"><h3>Wuthering Heights</h3><p class="author">Emily Brontë</p><p class="desc">Passion and revenge.</p><span class="genre">Tragedy</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/3xw0TkJV/Little-Women-Louisa-May-Alcott.jpg" alt="Little Women"><div class="book-card-three"><h3>Little Women</h3><p class="author">Louisa May Alcott</p><p class="desc">Sisterhood and growing up.</p><span class="genre">Family Fiction</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/fyG3jChZ/download-(3).jpg" alt="Dorian Gray"><div class="book-card-three"><h3>The Picture of Dorian Gray</h3><p class="author">Oscar Wilde</p><p class="desc">Beauty and morality.</p><span class="genre">Gothic</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/YSd37vFj/download-(4).jpg" alt="Brave New World"><div class="book-card-three"><h3>Brave New World</h3><p class="author">Aldous Huxley</p><p class="desc">Control and conformity.</p><span class="genre">Dystopian</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/4dKzTBsm/download-(5).jpg" alt="The Bell Jar"><div class="book-card-three"><h3>The Bell Jar</h3><p class="author">Sylvia Plath</p><p class="desc">Identity and mental health.</p><span class="genre">Literary Fiction</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/mrnHVCCs/download-(6).jpg" alt="Anna Karenina"><div class="book-card-three"><h3>Anna Karenina</h3><p class="author">Leo Tolstoy</p><p class="desc">Love and society.</p><span class="genre">Realist Fiction</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/wTkRZSLq/download-(7).jpg" alt="The Stranger"><div class="book-card-three"><h3>The Stranger</h3><p class="author">Albert Camus</p><p class="desc">Existential questioning.</p><span class="genre">Philosophical</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/C5gd6NKf/download-(8).jpg" alt="Sense and Sensibility"><div class="book-card-three"><h3>Sense and Sensibility</h3><p class="author">Jane Austen</p><p class="desc">Love and reason.</p><span class="genre">Romance</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/BvP6SyLp/download-(9).jpg" alt="Dracula"><div class="book-card-three"><h3>Dracula</h3><p class="author">Bram Stoker</p><p class="desc">Fear and the supernatural.</p><span class="genre">Horror</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/nVGLhqrz/download-(10).jpg" alt="Great Expectations"><div class="book-card-three"><h3>Great Expectations</h3><p class="author">Charles Dickens</p><p class="desc">Ambition and moral growth.</p><span class="genre">Bildungsroman</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/Y2RpHkDM/download-(11).jpg" alt="Les Misérables"><div class="book-card-three"><h3>Les Misérables</h3><p class="author">Victor Hugo</p><p class="desc">Justice and redemption.</p><span class="genre">Historical</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/x1wQRd8W/download-(12).jpg" alt="One Hundred Years of Solitude"><div class="book-card-three"><h3>One Hundred Years of Solitude</h3><p class="author">García Márquez</p><p class="desc">Magic and reality.</p><span class="genre">Magical Realism</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/J7pWFxt0/download-(13).jpg" alt="Fahrenheit 451"><div class="book-card-three"><h3>Fahrenheit 451</h3><p class="author">Ray Bradbury</p><p class="desc">Books are forbidden.</p><span class="genre">Dystopian</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/NMQWJ2c2/download.png" alt="The Metamorphosis"><div class="book-card-three"><h3>The Metamorphosis</h3><p class="author">Franz Kafka</p><p class="desc">Alienation and identity.</p><span class="genre">Absurdist</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/t4Pw9NRY/download-(14).jpg" alt="Of Mice and Men"><div class="book-card-three"><h3>Of Mice and Men</h3><p class="author">John Steinbeck</p><p class="desc">Friendship and dreams.</p><span class="genre">Tragedy</span></div></div>
-    <div class="book-card"><img src="https://i.postimg.cc/MHv3Nyr5/download-(15).jpg" alt="The Old Man and the Sea"><div class="book-card-three"><h3>The Old Man and the Sea</h3><p class="author">Ernest Hemingway</p><p class="desc">Endurance and pride.</p><span class="genre">Literary</span></div></div>
-  </section>
-</section>
+  <!-- Search Bar -->
+  <div class="search-bar" role="search" aria-label="Search books">
+    <input
+      type="search"
+      id="book-search"
+      placeholder="Search by title, author, or genre…"
+      aria-label="Search books by title, author, or genre"
+      autocomplete="off"
+    >
+  </div>
 
+  <!-- Filter Buttons -->
+  <div class="filter-bar" role="group" aria-label="Filter by genre">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Fiction">Fiction</button>
+    <button class="filter-btn" data-filter="Fantasy">Fantasy</button>
+    <button class="filter-btn" data-filter="Romance">Romance</button>
+    <button class="filter-btn" data-filter="Mystery">Mystery</button>
+    <button class="filter-btn" data-filter="Classics">Classics</button>
+    <button class="filter-btn" data-filter="Horror">Horror</button>
+    <button class="filter-btn" data-filter="Self Help">Self Help</button>
+    <button class="filter-btn" data-filter="Poetry">Poetry</button>
+    <button class="filter-btn" data-filter="Dystopian">Dystopian</button>
+    <button class="filter-btn" data-filter="Gothic">Gothic</button>
+    <button class="filter-btn" data-filter="Philosophy">Philosophy</button>
+  </div>
+
+  <!-- No results -->
+  <p class="no-results" id="no-results" role="status" aria-live="polite">No books found matching your search.</p>
+
+  <!-- Books Grid — populated by JS -->
+  <section class="books-grid" id="books-grid" aria-label="Book collection"></section>
+
+</main>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" aria-label="Scroll to top">↑</button>
+
+<script src="script.js"></script>
 </body>
 </html>
