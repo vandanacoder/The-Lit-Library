@@ -1,65 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Lit Library | About Us</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lit Library | About Us</title>
+  <meta name="description" content="Learn about The Lit Library — our story, mission, vision, and the reader community behind the project.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <h1><a href="index.html">The Lit Library</a></h1>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="book.html">Books</a></li>
-    <li><a href="about.html">About us</a></li>
-    <li><a href="contact.html">Contact us</a></li>
-  </ul>
+<!-- ===== NAVIGATION ===== -->
+<nav role="navigation" aria-label="Main navigation">
+  <h1><a href="index.html" aria-label="The Lit Library Home">The Lit Library</a></h1>
+  <div class="nav-controls">
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="about.html" class="active" aria-current="page">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-rl-btn" id="rl-toggle-btn" aria-label="Open reading list">
+      📚
+      <span class="rl-count" id="rl-count" aria-live="polite" style="display:none">0</span>
+    </button>
+    <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<section class="about-section">
-  <h1>About The Lit Library</h1>
-  <p class="about-intro">The Lit Library is a thoughtfully designed digital bookshelf created for readers who appreciate timeless literature, philosophical depth, and quiet storytelling. This project blends a love for books with clean web design, offering a calm space to explore stories that have shaped minds across generations.</p>
+<!-- ===== READING LIST PANEL ===== -->
+<aside class="reading-list-panel" id="reading-list-panel" aria-label="Reading list">
+  <div class="rl-header">
+    <h3>📚 Reading List</h3>
+    <button class="rl-close" id="rl-close" aria-label="Close reading list">✕</button>
+  </div>
+  <div class="rl-list" id="rl-list">
+    <p class="rl-empty">Your reading list is empty.</p>
+  </div>
+</aside>
 
-  <h2>Vision & Philosophy</h2>
-  <p>In a world filled with fast content and endless scrolling, The Lit Library aims to slow things down. The focus is on quality over quantity — books that encourage reflection, emotional understanding, and intellectual curiosity.</p>
+<!-- ===== ABOUT CONTENT ===== -->
+<main class="about-section" aria-label="About The Lit Library">
 
-  <h2>Curated Reading Experience</h2>
-  <p>Every book listed here is carefully selected for its literary value, cultural impact, or philosophical significance. Rather than acting as a store, this library serves as a guide for readers seeking meaningful works.</p>
+  <h1 class="fade-in">About The Lit Library</h1>
+  <p class="about-intro fade-in">
+    The Lit Library is a thoughtfully designed digital bookshelf created for readers who appreciate timeless literature, philosophical depth, and quiet storytelling. This project blends a love for books with clean web design, offering a calm space to explore stories that have shaped minds across generations.
+  </p>
 
-  <ul class="about-list">
+  <!-- Cards: Mission, Vision, Community -->
+  <div class="about-cards" aria-label="Core values">
+    <article class="about-card fade-in">
+      <span class="about-card-icon" aria-hidden="true">✍️</span>
+      <h3>Why We Were Created</h3>
+      <p>In a world of endless scrolling and fast content, The Lit Library was built to slow things down. A space that honours the quiet, transformative power of a well-chosen book — and the readers who love them.</p>
+    </article>
+    <article class="about-card fade-in">
+      <span class="about-card-icon" aria-hidden="true">🎯</span>
+      <h3>Our Mission</h3>
+      <p>To make reading more accessible, enjoyable, and modern — while still respecting the timeless magic of traditional literature. We focus on quality over quantity: books that encourage reflection, emotional depth, and intellectual curiosity.</p>
+    </article>
+    <article class="about-card fade-in">
+      <span class="about-card-icon" aria-hidden="true">🌟</span>
+      <h3>Our Vision</h3>
+      <p>To be one of the finest online spaces for discovering trending titles, hidden gems, and literary classics — a place where every reader finds something that speaks to them.</p>
+    </article>
+    <article class="about-card fade-in">
+      <span class="about-card-icon" aria-hidden="true">📖</span>
+      <h3>Reader Community</h3>
+      <p>The Lit Library is more than a catalogue — it's a gathering place for book lovers. A community of curious minds, slow readers, re-readers, and everyone in between who believes stories matter.</p>
+    </article>
+  </div>
+
+  <!-- Curated Experience -->
+  <h2 class="fade-in">Curated Reading Experience</h2>
+  <p class="fade-in">Every book in our collection is carefully selected for its literary value, cultural impact, or philosophical significance. Rather than acting as a store, this library serves as a guide for readers seeking meaningful works.</p>
+  <ul class="about-list fade-in" aria-label="What we curate">
     <li>Classic novels that defined literary history</li>
     <li>Philosophical and psychological fiction</li>
     <li>Dystopian and socially reflective literature</li>
     <li>Emotion-driven and character-focused stories</li>
   </ul>
 
-  <h2>Design Approach</h2>
-  <p>The website follows a minimal, book-inspired aesthetic — soft spacing, readable typography, and grid-based layouts that resemble a physical bookshelf. The design avoids distraction, allowing the books to remain the central focus.</p>
+  <!-- Timeline -->
+  <h2 class="fade-in">Our Timeline</h2>
+  <div class="timeline fade-in" aria-label="Project timeline">
+    <div class="timeline-item">
+      <h4>2023 — The Spark</h4>
+      <p>The Lit Library begins as a personal reading log and a love letter to literature.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Early 2024 — Taking Shape</h4>
+      <p>A proper website takes form: curated books, a vintage aesthetic, and a quote generator are born.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Mid 2024 — The Collection Grows</h4>
+      <p>25+ handpicked titles added across genres. Search, filtering, and dark mode introduced.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>2024 — Polished &amp; Expanded</h4>
+      <p>Reading lists, favorites, book modals, and a fully responsive design complete the vision.</p>
+    </div>
+  </div>
 
-  <h2>Technical Background</h2>
-  <p>The Lit Library is built as a frontend-focused project to strengthen core web development skills and best practices.</p>
+  <!-- Fun Facts -->
+  <h2 class="fade-in">Fun Facts About Books</h2>
+  <div class="fun-facts fade-in" aria-label="Book statistics">
+    <div class="fun-fact">
+      <span class="fact-number" aria-label="130 million books">130M+</span>
+      <p>Books estimated to exist in the world</p>
+    </div>
+    <div class="fun-fact">
+      <span class="fact-number" aria-label="4 million books published yearly">4M</span>
+      <p>New books published every year globally</p>
+    </div>
+    <div class="fun-fact">
+      <span class="fact-number" aria-label="Don Quixote most translated book">500+</span>
+      <p>Languages Don Quixote has been translated into</p>
+    </div>
+    <div class="fun-fact">
+      <span class="fact-number" aria-label="Reading reduces stress by 68%">68%</span>
+      <p>Stress reduction from just 6 minutes of reading</p>
+    </div>
+  </div>
 
-  <ul class="about-list">
-    <li>Semantic HTML5 for clean structure</li>
-    <li>CSS Grid & Flexbox for responsive layouts</li>
-    <li>Reusable components for scalability</li>
-    <li>JavaScript for search and interactivity</li>
+  <!-- Design Approach -->
+  <h2 class="fade-in">Design Approach</h2>
+  <p class="fade-in">The website follows a minimal, book-inspired aesthetic — soft parchment tones, readable typography, and grid-based layouts that evoke a physical bookshelf. The design avoids distraction, allowing books to remain the central focus.</p>
+
+  <!-- Technical Background -->
+  <h2 class="fade-in">Technical Background</h2>
+  <p class="fade-in">The Lit Library is built as a frontend-focused project to strengthen core web development skills:</p>
+  <ul class="about-list fade-in">
+    <li>Semantic HTML5 for clean, accessible structure</li>
+    <li>CSS Grid &amp; Flexbox for responsive layouts</li>
+    <li>Vanilla JavaScript for search, filtering, and interactivity</li>
+    <li>Local Storage for reading lists and favorites persistence</li>
   </ul>
 
-  <h2>Future Plans</h2>
-  <p>As the project grows, The Lit Library will continue evolving with new features and improvements, including:</p>
-
-  <ul class="about-list">
-    <li>Advanced book search and filtering</li>
-    <li>Genre-based collections</li>
-    <li>Reading lists and recommendations</li>
-    <li>Improved accessibility and performance</li>
+  <!-- Future Plans -->
+  <h2 class="fade-in">Future Plans</h2>
+  <p class="fade-in">As the project grows, The Lit Library will continue evolving:</p>
+  <ul class="about-list fade-in">
+    <li>Genre-based deep-dive collections</li>
+    <li>Community reading reviews and ratings</li>
+    <li>Backend integration for real user accounts</li>
+    <li>Improved accessibility and performance audits</li>
   </ul>
 
-  <p class="about-note">This project reflects a journey of learning, creativity, and appreciation for literature — a space where design meets storytelling.</p>
-</section>
+  <!-- Closing note -->
+  <p class="about-note fade-in">
+    "This project reflects a journey of learning, creativity, and appreciation for literature — a space where design meets storytelling, and every page turn leads somewhere new."
+  </p>
 
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo" aria-label="Site footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">The Lit Library</span>
+      <p>A digital sanctuary for readers who appreciate timeless literature and quiet storytelling.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Genres</h4>
+      <ul>
+        <li><a href="books.html">Fiction</a></li>
+        <li><a href="books.html">Classics</a></li>
+        <li><a href="books.html">Romance</a></li>
+        <li><a href="books.html">Fantasy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <div class="footer-social-links">
+        <a href="https://github.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
+        <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a href="mailto:litlibrary.contact@gmail.com" class="social-icon" aria-label="Email">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 The Lit Library. Built with love for readers everywhere.</p>
+    <button class="scroll-top-btn" id="footer-scroll-top" aria-label="Scroll to top">↑</button>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" aria-label="Scroll to top">↑</button>
+
+<script src="script.js"></script>
 </body>
 </html>
