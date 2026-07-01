@@ -8,9 +8,9 @@ A vintage-inspired digital bookshelf built for readers who appreciate timeless l
 
 ## 🌐 Live Preview
 
-**Repository:** [github.com/vandanacoder/The-Lit-Library](https://github.com/vandanacoder/The-Lit-Library)
+🔗 **[vandanacoder.github.io/The-Lit-Library](https://vandanacoder.github.io/The-Lit-Library/)**
 
-> To view locally — just clone the repo and open `index.html` in your browser. No build tools or dependencies required.
+**Repository:** [github.com/vandanacoder/The-Lit-Library](https://github.com/vandanacoder/The-Lit-Library)
 
 ---
 
@@ -115,7 +115,8 @@ The-Lit-Library/
 ├── about.html       # About page — cards, timeline, fun facts
 ├── contact.html     # Contact page — form, FAQ, social links
 ├── style.css        # Single unified stylesheet (no duplicates)
-└── script.js        # Single unified JavaScript file
+├── script.js        # Single unified JavaScript file
+└── README.md        # Project documentation
 ```
 
 > All CSS lives in one `style.css`. All JavaScript lives in one `script.js`. No external frameworks, no build tools.
@@ -159,31 +160,6 @@ Dark mode uses deep browns, warm parchment tones, and gold accents to maintain t
 
 ---
 
-## 🚀 Getting Started
-
-### Clone the repository
-```bash
-git clone https://github.com/vandanacoder/The-Lit-Library.git
-cd The-Lit-Library
-```
-
-### Run locally
-No build tools needed. Just open `index.html` in any modern browser.
-
-```bash
-# Option 1 — open directly
-open index.html
-
-# Option 2 — use VS Code Live Server extension (recommended)
-# Right-click index.html → "Open with Live Server"
-
-# Option 3 — use Python's built-in server
-python3 -m http.server 8000
-# Then visit http://localhost:8000
-```
-
----
-
 ## 📸 Pages Overview
 
 | Page | Description |
@@ -195,44 +171,9 @@ python3 -m http.server 8000
 
 ---
 
-## 💾 Local Storage Keys
-
-| Key | Contents |
-|---|---|
-| `litlibrary-rl` | Reading list (array of book objects) |
-| `litlibrary-favs` | Favorite book IDs (array of numbers) |
-| `litlibrary-dark` | Dark mode preference (boolean) |
-
----
-
-## 🗺️ Roadmap
-
-- [ ] Backend integration for the contact form
-- [ ] User accounts with cloud-synced reading lists
-- [ ] Reader reviews and community ratings
-- [ ] More books across additional genres
-- [ ] Dedicated genre collection pages
-- [ ] Book-of-the-month archive
-- [ ] Performance audit and image optimisation
-
----
-
-## 🤝 Contributing
-
-Contributions, suggestions, and book recommendations are always welcome!
-
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add: your feature'`)
-4. Push to your branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
-
----
-
 ## 📬 Contact
 
 **Vandana** — [@vandanacoder](https://github.com/vandanacoder)
-✉️ litlibrary.contact@gmail.com
 
 ---
 
