@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Lit Library | Home</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lit Library | Home</title>
+  <meta name="description" content="The Lit Library — your digital sanctuary for timeless literature, curated reads, and inspiring quotes.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <h1><a href="index.html">The Lit Library</a></h1>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="book.html">Books</a></li>
-    <li><a href="about.html">About us</a></li>
-    <li><a href="contact.html">Contact us</a></li>
-  </ul>
+<!-- ===== NAVIGATION ===== -->
+<nav role="navigation" aria-label="Main navigation">
+  <h1><a href="index.html" aria-label="The Lit Library Home">The Lit Library</a></h1>
+  <div class="nav-controls">
+    <ul id="nav-links">
+      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <!-- Reading list toggle -->
+    <button class="nav-rl-btn" id="rl-toggle-btn" aria-label="Open reading list">
+      📚
+      <span class="rl-count" id="rl-count" aria-live="polite" style="display:none">0</span>
+    </button>
+    <!-- Dark mode toggle -->
+    <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+    <!-- Hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<section class="wholebody">
-  <section class="Home" id="Home">
+<!-- ===== READING LIST PANEL ===== -->
+<aside class="reading-list-panel" id="reading-list-panel" aria-label="Reading list">
+  <div class="rl-header">
+    <h3>📚 Reading List</h3>
+    <button class="rl-close" id="rl-close" aria-label="Close reading list">✕</button>
+  </div>
+  <div class="rl-list" id="rl-list">
+    <p class="rl-empty">Your reading list is empty. Add books from the Books page!</p>
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="wholebody">
+
+  <!-- === HERO === -->
+  <section class="Home" id="Home" aria-label="Hero section">
     <div class="homeimage">
       <div class="homeintro">
         <h1>Welcome to The Lit Library</h1>
         <p>Your doorway to imagination, knowledge, and inspiration.</p>
       </div>
-      <section class="Welcome">
-        <p>The Lit Library, where stories come to life and knowledge is just a page away. We believe that books are more than just paper and ink—they're windows to new worlds, ideas, and emotions. Whether you're a casual reader or a passionate bibliophile, this is your perfect space.</p>
+      <section class="Welcome" aria-label="Introduction">
+        <p>The Lit Library — where stories come to life and knowledge is just a page away. We believe books are more than paper and ink; they're windows to new worlds, ideas, and emotions. Whether you're a casual reader or a passionate bibliophile, this is your perfect space.</p>
       </section>
-      <button class="rm-button"><a href="about.html">Read more</a></button>
+      <a href="about.html" class="rm-button btn" aria-label="Read more about The Lit Library">Read More</a>
     </div>
 
-    <div class="home-detail-image">
-      <section class="Home-Detail">
+    <!-- What We Offer -->
+    <div class="home-detail-image" aria-label="What we offer">
+      <section class="Home-Detail fade-in">
         <h2>What We Offer</h2>
         <p>Curated collections across all genres</p>
         <p>Handpicked trending titles</p>
-        <p>Access to eBooks</p>
-        <p>Digital reading material</p>
+        <p>Access to eBooks &amp; digital reading material</p>
         <p>A vibrant, book-loving community</p>
         <h2>Why Choose Us</h2>
-        <p>Discover books that match your taste</p>
+        <p>Books that match your taste</p>
         <p>Stay updated with trending reads</p>
         <p>Reader-friendly interface</p>
         <p>Built by readers, for readers</p>
@@ -48,73 +77,189 @@
     </div>
   </section>
 
-  <!-- Interactive Quote Generator -->
-  <section class="Quote" id="Quotes">
-                <div class="quote-detail">
-                    <h2>Inspiration From Great Minds</h2>
-                    <div id="quote-container">
-                        <p id="quote-text">Loading quote...</p>
-                        <p id="quote-author">— Author</p>
-                    </div>
-                    <div class="quote-buttons">
-                        <button id="new-quote-btn">Get New Quote</button>
-                    </div>
-                    <p class="quote-info">Click the button to discover inspiring quotes about books and reading</p>
-                </div>
-            </section>
+  <!-- === FEATURED BOOK OF THE WEEK === -->
+  <section class="featured-section fade-in" aria-label="Featured book of the week">
+    <h2 class="section-title">Featured Book of the Week</h2>
+    <p class="section-subtitle">Handpicked by our readers — a story not to be missed</p>
+    <div class="featured-book">
+      <img
+        src="https://i.postimg.cc/jjQGJm4K/Norwegian-Wood-Haruki-Murakami.jpg"
+        alt="Book cover of Norwegian Wood by Haruki Murakami"
+        loading="lazy"
+      >
+      <div class="featured-book-info">
+        <span class="featured-badge">⭐ Book of the Week</span>
+        <h3>Norwegian Wood</h3>
+        <p class="author-name">Haruki Murakami</p>
+        <div class="featured-stars" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+        <p class="featured-desc">
+          A nostalgic and heartbreaking coming-of-age story set in late-1960s Tokyo, following Toru Watanabe as he grapples with love, loss, and identity. Murakami's most deeply personal novel — tender, melancholic, and unforgettable.
+        </p>
+        <a href="books.html" class="btn" aria-label="Explore all books">Explore All Books →</a>
+      </div>
+    </div>
+  </section>
 
-  <section class="Tranding-Books" id="Tranding-Books-tag">
+  <!-- === QUOTE GENERATOR === -->
+  <section class="Quote" id="Quotes" aria-label="Quote generator">
+    <div class="quote-detail">
+      <h2>Inspiration From Great Minds</h2>
+      <div id="quote-container" role="region" aria-live="polite" aria-label="Current quote">
+        <p id="quote-text">Loading quote...</p>
+        <p id="quote-author">— Author</p>
+      </div>
+      <div class="quote-buttons" role="group" aria-label="Quote controls">
+        <button id="prev-quote-btn" aria-label="Previous quote">← Prev</button>
+        <button id="new-quote-btn" aria-label="Random quote">✨ Random</button>
+        <button id="next-quote-btn" aria-label="Next quote">Next →</button>
+        <button id="copy-quote-btn" aria-label="Copy quote">📋 Copy</button>
+        <button id="share-quote-btn" aria-label="Share quote">🔗 Share</button>
+      </div>
+      <p class="quote-info">Discover inspiring quotes about books, reading, and the life of the mind</p>
+    </div>
+  </section>
+
+  <!-- === TRENDING BOOKS === -->
+  <section class="Tranding-Books fade-in" id="Tranding-Books-tag" aria-label="Trending books">
     <h2>Trending Books You Can't Miss</h2>
-    <p>Discover what everyone's reading! These handpicked titles are flying off the shelves worldwide.</p>
+    <p>Handpicked titles flying off shelves worldwide — start your next great read here.</p>
     <div class="Tranding-Books-Details">
-      <div class="all-three"><div class="bookimage"><img src="https://i.postimg.cc/pdpF9MH5/white-nights.jpg" alt="White Nights"></div><div class="booktitle"><p>White Nights – Dostoevsky</p></div></div>
-      <div class="all-three"><div class="bookimage"><img src="https://i.postimg.cc/KcqrdKGd/31H108p3WCL-UF1000-1000-QL80.jpg" alt="No Longer Human"></div><div class="booktitle"><p>No Longer Human – Dazai</p></div></div>
-      <div class="all-three"><div class="bookimage"><img src="https://i.postimg.cc/jjQGJm4K/Norwegian-Wood-Haruki-Murakami.jpg" alt="Norwegian Wood"></div><div class="booktitle"><p>Norwegian Wood – Murakami</p></div></div>
-      <div class="all-three"><div class="bookimage"><img src="https://i.postimg.cc/63WFVcMZ/Snow-Country-Yasunari-Kawabata.jpg" alt="Snow Country"></div><div class="booktitle"><p>Snow Country – Kawabata</p></div></div>
+      <div class="all-three" tabindex="0" role="button" aria-label="White Nights by Dostoevsky">
+        <div class="bookimage">
+          <img src="https://i.postimg.cc/pdpF9MH5/white-nights.jpg" alt="White Nights by Fyodor Dostoevsky" loading="lazy">
+        </div>
+        <div class="booktitle"><p>White Nights – Dostoevsky</p></div>
+      </div>
+      <div class="all-three" tabindex="0" role="button" aria-label="No Longer Human by Dazai">
+        <div class="bookimage">
+          <img src="https://i.postimg.cc/KcqrdKGd/31H108p3WCL-UF1000-1000-QL80.jpg" alt="No Longer Human by Osamu Dazai" loading="lazy">
+        </div>
+        <div class="booktitle"><p>No Longer Human – Dazai</p></div>
+      </div>
+      <div class="all-three" tabindex="0" role="button" aria-label="Norwegian Wood by Murakami">
+        <div class="bookimage">
+          <img src="https://i.postimg.cc/jjQGJm4K/Norwegian-Wood-Haruki-Murakami.jpg" alt="Norwegian Wood by Haruki Murakami" loading="lazy">
+        </div>
+        <div class="booktitle"><p>Norwegian Wood – Murakami</p></div>
+      </div>
+      <div class="all-three" tabindex="0" role="button" aria-label="Snow Country by Kawabata">
+        <div class="bookimage">
+          <img src="https://i.postimg.cc/63WFVcMZ/Snow-Country-Yasunari-Kawabata.jpg" alt="Snow Country by Yasunari Kawabata" loading="lazy">
+        </div>
+        <div class="booktitle"><p>Snow Country – Kawabata</p></div>
+      </div>
     </div>
-    <button class="book-button"><a href="book.html">See more</a></button>
+    <a href="books.html" class="book-button btn" aria-label="See more books">See All Books</a>
   </section>
 
-  <section class="Books">
-    <h2>About Books Categorise</h2>
-    <div class="bookdetail"><p>At The Lit Library, we categorize our collection to make your search easier.</p></div>
-    <div class="booktype">Fiction</div><div class="bookdetail1"><p>Fantasy, mystery, thrillers, romance, historical fiction, and more.</p></div>
-    <div class="booktype2">Non-Fiction</div><div class="bookdetail2"><p>Biographies, history, self-help, science, and insights.</p></div>
-    <div class="booktype3">Young Adult</div><div class="bookdetail3"><p>Books about growing up, friendship, love, and identity.</p></div>
-    <div class="booktype4">Children's Books</div><div class="bookdetail4"><p>Colorful, magical stories for young readers.</p></div>
-    <div class="booktype5">eBooks & Audiobooks</div><div class="bookdetail5"><p>For those who love digital reading or listening on the go.</p></div>
+  <!-- === BOOK CATEGORIES === -->
+  <section class="Books fade-in" aria-label="Book categories">
+    <h2>Our Book Categories</h2>
+    <div class="bookdetail"><p>At The Lit Library, we curate our collection to make your search easier and your reading life richer.</p></div>
+    <div class="booktype" role="heading" aria-level="3">Fiction</div>
+    <div class="bookdetail1"><p>Fantasy, mystery, thrillers, romance, historical fiction, and more — worlds waiting to be explored.</p></div>
+    <div class="booktype2" role="heading" aria-level="3">Non-Fiction</div>
+    <div class="bookdetail2"><p>Biographies, history, self-help, science, and deep insights into the human experience.</p></div>
+    <div class="booktype3" role="heading" aria-level="3">Young Adult</div>
+    <div class="bookdetail3"><p>Stories about growing up, friendship, love, and the discovery of identity and voice.</p></div>
+    <div class="booktype4" role="heading" aria-level="3">Children's Books</div>
+    <div class="bookdetail4"><p>Colorful, magical stories that spark imagination and a lifelong love of reading.</p></div>
+    <div class="booktype5" role="heading" aria-level="3">eBooks &amp; Audiobooks</div>
+    <div class="bookdetail5"><p>For those who love digital reading or listening on the go — stories for every format.</p></div>
   </section>
 
-  <section class="AboutUs">
+  <!-- === ABOUT US SNIPPET === -->
+  <section class="AboutUs fade-in" aria-label="About The Lit Library">
     <div class="aboutus-image">
-      <h2>Story:</h2><p>The Lit Library was born out of the simple love for books. What started as a small idea turned into a digital sanctuary for readers of all kinds.</p>
-      <h2>Our Mission:</h2><p>To make reading more accessible, enjoyable, and modern—while still respecting the magic of traditional literature.</p>
-      <h2>Our Vision:</h2><p>We aim to be one of the best online spaces for discovering trending titles, hidden gems, and literary favorites.</p>
-      <h2>The Team:</h2><p>We're a small team of bookworms, developers, and dreamers who believe in the power of stories.</p>
+      <h2>Story:</h2>
+      <p>The Lit Library was born out of the simple love for books. What started as a small idea grew into a digital sanctuary for readers of all kinds.</p>
+      <h2>Our Mission:</h2>
+      <p>To make reading more accessible, enjoyable, and modern — while still respecting the magic of traditional literature.</p>
+      <h2>Our Vision:</h2>
+      <p>To be one of the best online spaces for discovering trending titles, hidden gems, and literary favorites across every genre.</p>
+      <h2>The Team:</h2>
+      <p>A small crew of bookworms, developers, and dreamers who believe in the power of stories to change lives.</p>
     </div>
   </section>
 
-  <section class="ContactUs">
+  <!-- === CONTACT SNIPPET === -->
+  <section class="ContactUs fade-in" aria-label="Contact information">
     <h2>Let's Connect</h2>
     <div class="connect">
-      <div class="connect1"><h2>I'd Love to Hear from You</h2><p>Have a question or suggestion?</p><p>We're always open to hearing from fellow book lovers.</p></div>
-      <div class="connect1"><h2>You can contact us for:</h2><p>Book recommendations</p><p>Website feedback</p><p>Collaboration inquiries</p></div>
-      <div class="connect1"><h2>Email:</h2><p><a href="contact.html">thelitlibrary@email.com</a></p></div>
-      <div class="connect1"><h2>Social Media:</h2><p>Instagram: @thelitlibrary</p><p>Twitter: @litlibraryreads</p></div>
+      <div class="connect1">
+        <h2>I'd Love to Hear from You</h2>
+        <p>Have a question, suggestion, or book recommendation?</p>
+        <p>We're always open to hearing from fellow book lovers.</p>
+      </div>
+      <div class="connect1">
+        <h2>You can contact us for:</h2>
+        <p>Book recommendations &amp; reading lists</p>
+        <p>Website feedback &amp; design ideas</p>
+        <p>Collaboration &amp; partnership inquiries</p>
+      </div>
+      <div class="connect1">
+        <h2>Email:</h2>
+        <p><a href="contact.html">litlibrary.contact@gmail.com</a></p>
+      </div>
+      <div class="connect1">
+        <h2>Social Media:</h2>
+        <p>Instagram: @thelitlibrary</p>
+        <p>Goodreads: The Lit Library</p>
+      </div>
     </div>
   </section>
 
-  <section class="About">
-    <div class="aboutcenter"><h2>About Us</h2><p>"Within pages, we vanish—and in their silence, rediscover who we are."</p></div>
-    <div class="endheadline">
-      <div><h3>EXPLORE</h3><p><a href="index.html">Home</a> | <a href="books.html">Books</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></p></div>
-      <div><h3>CONNECT</h3><p>Editorial Inquiries | <a href="contact.html">thelitlibrary@email.com</a></p></div>
-      <div><h3>OUR VIBE</h3><p>Instagram | Goodreads</p></div>
+  <!-- === FOOTER === -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-top">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <span class="footer-logo">The Lit Library</span>
+        <p>A digital sanctuary for readers who appreciate timeless literature, thoughtful storytelling, and the quiet magic of books.</p>
+      </div>
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="books.html">Books</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Categories -->
+      <div class="footer-col">
+        <h4>Genres</h4>
+        <ul>
+          <li><a href="books.html">Fiction</a></li>
+          <li><a href="books.html">Classics</a></li>
+          <li><a href="books.html">Romance</a></li>
+          <li><a href="books.html">Fantasy</a></li>
+          <li><a href="books.html">Horror</a></li>
+        </ul>
+      </div>
+      <!-- Social -->
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <div class="footer-social-links">
+          <a href="https://github.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
+          <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+          <a href="mailto:litlibrary.contact@gmail.com" class="social-icon" aria-label="Email">✉</a>
+          <a href="https://instagram.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+        </div>
+      </div>
     </div>
-  </section>
-</section>
+    <div class="footer-bottom">
+      <p>© 2024 The Lit Library. Built with love for readers everywhere.</p>
+      <button class="scroll-top-btn" id="footer-scroll-top" aria-label="Scroll to top">↑</button>
+    </div>
+  </footer>
+
+</main>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
