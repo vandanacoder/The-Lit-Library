@@ -1,64 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Lit Library | Contact Us</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lit Library | Contact</title>
+  <meta name="description" content="Get in touch with The Lit Library — share book recommendations, feedback, or ideas.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <h1><a href="index.html">The Lit Library</a></h1>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="book.html">Books</a></li>
-    <li><a href="about.html">About us</a></li>
-    <li><a href="contact.html">Contact us</a></li>
-  </ul>
+<!-- ===== NAVIGATION ===== -->
+<nav role="navigation" aria-label="Main navigation">
+  <h1><a href="index.html" aria-label="The Lit Library Home">The Lit Library</a></h1>
+  <div class="nav-controls">
+    <ul id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+    </ul>
+    <button class="nav-rl-btn" id="rl-toggle-btn" aria-label="Open reading list">
+      📚
+      <span class="rl-count" id="rl-count" aria-live="polite" style="display:none">0</span>
+    </button>
+    <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<section class="contact-section">
-  <h1>Contact</h1>
-  <p class="contact-intro">The Lit Library is a personal, learning-focused project built for readers who appreciate thoughtful literature and clean digital spaces. If you have ideas, feedback, or book recommendations, your message is always welcome.</p>
+<!-- ===== READING LIST PANEL ===== -->
+<aside class="reading-list-panel" id="reading-list-panel" aria-label="Reading list">
+  <div class="rl-header">
+    <h3>📚 Reading List</h3>
+    <button class="rl-close" id="rl-close" aria-label="Close reading list">✕</button>
+  </div>
+  <div class="rl-list" id="rl-list">
+    <p class="rl-empty">Your reading list is empty.</p>
+  </div>
+</aside>
 
-  <div class="contact-info">
-    <h2>Get in Touch</h2>
+<!-- ===== CONTACT CONTENT ===== -->
+<main class="contact-section" aria-label="Contact page">
+
+  <h1 class="fade-in">Contact Us</h1>
+  <p class="contact-intro fade-in">
+    The Lit Library is a personal, learning-focused project built for readers who appreciate thoughtful literature and clean digital spaces. If you have ideas, feedback, or book recommendations, your message is always welcome.
+  </p>
+
+  <!-- Get In Touch Info -->
+  <h2 class="fade-in">Get in Touch</h2>
+  <div class="contact-info fade-in">
     <p><strong>Email:</strong> litlibrary.contact@gmail.com</p>
     <p><strong>Project Type:</strong> Personal / Educational</p>
     <p><strong>Focus Areas:</strong> Literature, Web Design, Frontend Development</p>
-    <p><strong>Status:</strong> Actively evolving</p>
+    <p><strong>Status:</strong> Actively evolving 🌱</p>
   </div>
 
-  <h2>What You Can Contact Me About</h2>
-  <ul class="contact-extra-ul">
-    <li>Book suggestions or reading recommendations</li>
+  <!-- What To Contact About -->
+  <h2 class="fade-in">What You Can Contact Me About</h2>
+  <ul class="contact-extra-ul fade-in" aria-label="Topics for contact">
+    <li>Book suggestions and reading recommendations</li>
     <li>Feedback on website design or usability</li>
     <li>Ideas for new features or sections</li>
     <li>General thoughts on literature and storytelling</li>
+    <li>Collaboration or open-source contributions</li>
   </ul>
 
-  <h2>Send a Message</h2>
-  <form class="contact-form" id="contactForm">
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Your Email" required>
-    <textarea placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit">Send Message</button>
+  <!-- Social Media -->
+  <h2 class="fade-in">Find Us Online</h2>
+  <div class="contact-social fade-in" role="list" aria-label="Social media links">
+    <a href="https://github.com" class="contact-social-link" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="GitHub">
+      <span aria-hidden="true">⌨️</span> GitHub
+    </a>
+    <a href="https://linkedin.com" class="contact-social-link" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="LinkedIn">
+      <span aria-hidden="true">💼</span> LinkedIn
+    </a>
+    <a href="mailto:litlibrary.contact@gmail.com" class="contact-social-link" role="listitem" aria-label="Email">
+      <span aria-hidden="true">✉️</span> Email
+    </a>
+    <a href="https://instagram.com" class="contact-social-link" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="Instagram">
+      <span aria-hidden="true">📸</span> Instagram
+    </a>
+    <a href="https://goodreads.com" class="contact-social-link" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="Goodreads">
+      <span aria-hidden="true">📚</span> Goodreads
+    </a>
+  </div>
+
+  <!-- Map Placeholder -->
+  <h2 class="fade-in">Based In</h2>
+  <div class="map-placeholder fade-in" role="img" aria-label="Map showing project location">
+    <span class="map-icon" aria-hidden="true">📍</span>
+    <p>The Lit Library — A Digital Library, Everywhere</p>
+    <p style="font-size:0.8rem;opacity:0.7;">Interactive map coming soon</p>
+  </div>
+
+  <!-- Contact Form -->
+  <h2 class="fade-in">Send a Message</h2>
+  <div class="form-success" id="form-success" role="alert" aria-live="assertive">
+    ✓ Thank you! Your message has been received. We'll get back to you soon.
+  </div>
+  <div class="form-error" id="form-error" role="alert" aria-live="assertive">
+    Please fill in all fields correctly before submitting.
+  </div>
+
+  <form class="contact-form fade-in" id="contactForm" novalidate aria-label="Contact form">
+    <label for="contact-name" style="font-size:0.85rem;color:#5a4030;font-weight:500;padding-left:0.3rem;">Your Name *</label>
+    <input
+      type="text"
+      id="contact-name"
+      name="name"
+      placeholder="Jane Austen"
+      required
+      autocomplete="name"
+      aria-required="true"
+    >
+    <label for="contact-email" style="font-size:0.85rem;color:#5a4030;font-weight:500;padding-left:0.3rem;">Your Email *</label>
+    <input
+      type="email"
+      id="contact-email"
+      name="email"
+      placeholder="you@example.com"
+      required
+      autocomplete="email"
+      aria-required="true"
+    >
+    <label for="contact-subject" style="font-size:0.85rem;color:#5a4030;font-weight:500;padding-left:0.3rem;">Subject</label>
+    <input
+      type="text"
+      id="contact-subject"
+      name="subject"
+      placeholder="Book recommendation / Feedback / Other"
+      autocomplete="off"
+    >
+    <label for="contact-message" style="font-size:0.85rem;color:#5a4030;font-weight:500;padding-left:0.3rem;">Your Message *</label>
+    <textarea
+      id="contact-message"
+      name="message"
+      placeholder="Share your thoughts, book recommendations, or feedback…"
+      rows="6"
+      required
+      aria-required="true"
+    ></textarea>
+    <button type="submit">Send Message ✉️</button>
   </form>
 
-  <div class="contact-note">
-    <p>This contact form is currently part of the frontend design and does not store or send messages to a server. Backend integration may be added in future updates as the project grows.</p>
-    <p>Thank you for visiting The Lit Library and taking the time to explore stories that continue to inspire readers across generations.</p>
+  <!-- FAQ -->
+  <h2 class="fade-in">Frequently Asked Questions</h2>
+  <div class="faq-list fade-in" role="list" aria-label="Frequently asked questions">
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+        Is The Lit Library a real bookstore?
+        <span class="faq-chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="faq-answer" id="faq-1" role="region">
+        No — The Lit Library is a personal frontend project and digital curation space. It is not a commercial bookstore and does not sell or distribute books.
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+        Can I suggest a book to be featured?
+        <span class="faq-chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="faq-answer" id="faq-2" role="region">
+        Absolutely! Use the contact form above to suggest a title. We love hearing from fellow readers and actively consider community recommendations.
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+        Does the contact form actually send emails?
+        <span class="faq-chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="faq-answer" id="faq-3" role="region">
+        Not yet — the form is currently a frontend demo. Backend integration is planned for a future update. For now, you can reach us directly at litlibrary.contact@gmail.com.
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+        Is my reading list and favorites data saved?
+        <span class="faq-chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="faq-answer" id="faq-4" role="region">
+        Yes! Your reading list and favorite books are saved in your browser's Local Storage, so they persist across page refreshes. They are stored locally on your device only.
+      </div>
+    </div>
+
+    <div class="faq-item" role="listitem">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+        Will there be more books added?
+        <span class="faq-chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="faq-answer" id="faq-5" role="region">
+        Yes! The collection is actively growing. New genres, titles, and curation features are planned. Check back regularly or follow us on social media for updates.
+      </div>
+    </div>
+
   </div>
-</section>
 
-<script>
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert("Thank you for your message! (Demo mode - backend coming soon)");
-    this.reset();
-  });
-</script>
+  <!-- Disclaimer note -->
+  <div class="contact-note fade-in">
+    <p>This contact form is currently part of the frontend design and does not store or send messages to a server. Backend integration may be added in future updates.</p>
+    <p>Thank you for visiting The Lit Library and taking the time to explore stories that continue to inspire readers across generations. 📖</p>
+  </div>
 
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo" aria-label="Site footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">The Lit Library</span>
+      <p>A digital sanctuary for readers who appreciate timeless literature and quiet storytelling.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Genres</h4>
+      <ul>
+        <li><a href="books.html">Fiction</a></li>
+        <li><a href="books.html">Classics</a></li>
+        <li><a href="books.html">Romance</a></li>
+        <li><a href="books.html">Horror</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <div class="footer-social-links">
+        <a href="https://github.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
+        <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a href="mailto:litlibrary.contact@gmail.com" class="social-icon" aria-label="Email">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 The Lit Library. Built with love for readers everywhere.</p>
+    <button class="scroll-top-btn" id="footer-scroll-top" aria-label="Scroll to top">↑</button>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" aria-label="Scroll to top">↑</button>
+
+<script src="script.js"></script>
 </body>
 </html>
