@@ -6,36 +6,43 @@
  * Dark Mode (LocalStorage), Scroll Animations, Nav, FAQ, Contact Form.
  */
 
-'use strict';
-
 // ============================================================
 // UTILITIES
 // ============================================================
 
 /** Show a brief toast notification */
 function showToast(message) {
-  const toast = document.getElementById('toast');
+  var toast = document.getElementById('toast');
   if (!toast) return;
   toast.textContent = message;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2800);
+  setTimeout(function() { toast.classList.remove('show'); }, 2800);
 }
 
 /** Safely get item from LocalStorage */
 function lsGet(key) {
-  try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
+  try {
+    var val = localStorage.getItem(key);
+    return val ? JSON.parse(val) : null;
+  } catch(e) {
+    return null;
+  }
 }
 
 /** Safely set item in LocalStorage */
 function lsSet(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* quota exceeded */ }
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch(e) {
+    // quota exceeded — fail silently
+  }
 }
 
 // ============================================================
 // BOOK DATA
 // ============================================================
 
-const BOOKS = [
+var BOOKS = [
   {
     id: 1,
     title: '1984',
@@ -143,25 +150,25 @@ const BOOKS = [
   {
     id: 9,
     title: 'Jane Eyre',
-    author: 'Charlotte Brontë',
+    author: 'Charlotte Bronte',
     genre: 'Gothic Romance',
     filterGenres: ['Romance', 'Gothic', 'Classics'],
     rating: 5,
     desc: 'A story of independence, passion, and a woman who refuses to compromise her soul.',
     fullDesc: 'An orphan governess navigates love, independence, and morality in Victorian England. Jane Eyre is one of literature\'s most fiercely individual heroines — her voice burns off the page.',
     quote: '"I am no bird; and no net ensnares me."',
-    why: 'Jane is ahead of her time in every way. Her refusal to accept less than she deserves feels as radical and inspiring today as it ever did.',
+    why: 'Jane is ahead of her time in every way. Her refusal to accept less than she deserves feels as radical and inspiring today as ever.',
     img: 'https://i.postimg.cc/kGZFbW4X/Jane-Eyre-(Charlotte-Bronte).jpg'
   },
   {
     id: 10,
     title: 'Wuthering Heights',
-    author: 'Emily Brontë',
+    author: 'Emily Bronte',
     genre: 'Tragedy',
     filterGenres: ['Fiction', 'Gothic', 'Classics'],
     rating: 4,
     desc: 'A wild, fierce love story set on the dark Yorkshire moors — passion and revenge.',
-    fullDesc: 'Heathcliff and Catherine\'s doomed love burns across generations in this gothic tragedy. Emily Brontë\'s only novel is unlike anything else — raw, strange, and unforgettable.',
+    fullDesc: 'Heathcliff and Catherine\'s doomed love burns across generations in this gothic tragedy. Emily Bronte\'s only novel is unlike anything else — raw, strange, and unforgettable.',
     quote: '"Whatever our souls are made of, his and mine are the same."',
     why: 'It rewrites what a love story can be — obsessive, destructive, utterly consuming. Nothing quite like it.',
     img: 'https://i.postimg.cc/j2JnBmxT/Wuthering-Heights-by-Emily-Bronte.jpg'
@@ -173,7 +180,7 @@ const BOOKS = [
     genre: 'Family Fiction',
     filterGenres: ['Fiction', 'Classics'],
     rating: 4,
-    desc: 'A warm, wise portrait of four sisters growing up, growing apart, and growing into themselves.',
+    desc: 'A warm, wise portrait of four sisters growing up and growing into themselves.',
     fullDesc: 'The March sisters — Meg, Jo, Beth, and Amy — navigate love, loss, ambition, and identity in Civil War-era New England. Jo March remains one of literature\'s most beloved heroines.',
     quote: '"I am not afraid of storms, for I am learning how to sail my ship."',
     why: 'Jo\'s fierce independence and creative ambition have inspired generations of women to claim their own stories.',
@@ -285,7 +292,7 @@ const BOOKS = [
   },
   {
     id: 20,
-    title: 'Les Misérables',
+    title: 'Les Miserables',
     author: 'Victor Hugo',
     genre: 'Historical',
     filterGenres: ['Fiction', 'Classics'],
@@ -299,12 +306,12 @@ const BOOKS = [
   {
     id: 21,
     title: 'One Hundred Years of Solitude',
-    author: 'Gabriel García Márquez',
+    author: 'Gabriel Garcia Marquez',
     genre: 'Magical Realism',
     filterGenres: ['Fiction', 'Fantasy'],
     rating: 5,
-    desc: 'Seven generations of the Buendía family — myth, history, and magic woven together.',
-    fullDesc: 'The founding and fall of the mythical town of Macondo, told through the Buendía family over a century. García Márquez blends the supernatural with the mundane in a way that feels completely natural and utterly hypnotic.',
+    desc: 'Seven generations of the Buendia family — myth, history, and magic woven together.',
+    fullDesc: 'The founding and fall of the mythical town of Macondo, told through the Buendia family over a century. Garcia Marquez blends the supernatural with the mundane in a way that feels completely natural and utterly hypnotic.',
     quote: '"A person doesn\'t die when he should but when he can."',
     why: 'An experience unlike any other in literature. After reading it, the world itself feels slightly magical.',
     img: 'https://i.postimg.cc/x1wQRd8W/download-(12).jpg'
@@ -367,7 +374,7 @@ const BOOKS = [
 // QUOTES
 // ============================================================
 
-const QUOTES = [
+var QUOTES = [
   { text: "A reader lives a thousand lives before he dies. The man who never reads lives only one.", author: "George R.R. Martin" },
   { text: "So many books, so little time.", author: "Frank Zappa" },
   { text: "Books are a uniquely portable magic.", author: "Stephen King" },
@@ -381,96 +388,114 @@ const QUOTES = [
   { text: "A library is not a luxury but one of the necessities of life.", author: "Henry Ward Beecher" },
   { text: "Words are, of course, the most powerful drug used by mankind.", author: "Rudyard Kipling" },
   { text: "I have always imagined that Paradise will be a kind of library.", author: "Jorge Luis Borges" },
-  { text: "Books are mirrors: you only see in them what you already have inside you.", author: "Carlos Ruiz Zafón" },
-  { text: "The reading of all good books is like a conversation with the finest minds of past centuries.", author: "René Descartes" },
+  { text: "Books are mirrors: you only see in them what you already have inside you.", author: "Carlos Ruiz Zafon" },
+  { text: "The reading of all good books is like a conversation with the finest minds of past centuries.", author: "Rene Descartes" },
   { text: "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.", author: "Groucho Marx" },
   { text: "Literature is my Utopia. Here I am not disenfranchised.", author: "Helen Keller" },
   { text: "To learn to read is to light a fire; every syllable that is spelled out is a spark.", author: "Victor Hugo" },
-  { text: "A book is a garden, an orchard, a storehouse, a party, a company by the way, a counsellor, a multitude of counsellors.", author: "Henry Ward Beecher" },
-  { text: "We read to know we're not alone.", author: "C.S. Lewis" },
+  { text: "We read to know we are not alone.", author: "C.S. Lewis" },
   { text: "If you only read the books that everyone else is reading, you can only think what everyone else is thinking.", author: "Haruki Murakami" },
-  { text: "One must always be careful of books, and what is inside them, for words have the power to change us.", author: "Cassandra Clare" },
-  { text: "The best books are the ones that tell you what you already know.", author: "George Orwell" },
   { text: "Reading is dreaming with open eyes.", author: "Yolanda Nava" },
-  { text: "A room without books is like a body without a soul.", author: "Marcus Tullius Cicero" }
+  { text: "A room without books is like a body without a soul.", author: "Marcus Tullius Cicero" },
+  { text: "Not all those who wander are lost.", author: "J.R.R. Tolkien" },
+  { text: "The best time to read was always ten years ago. The second best time is now.", author: "Unknown" },
+  { text: "One must always be careful of books, and what is inside them, for words have the power to change us.", author: "Cassandra Clare" }
 ];
 
-let quoteIndex = 0;
+var quoteIndex = 0;
 
 function starsHTML(rating) {
-  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  var stars = '';
+  for (var i = 0; i < 5; i++) {
+    stars += i < rating ? '★' : '☆';
+  }
+  return stars;
 }
 
 function renderQuote(index) {
-  const container = document.getElementById('quote-container');
-  const textEl = document.getElementById('quote-text');
-  const authorEl = document.getElementById('quote-author');
+  var container = document.getElementById('quote-container');
+  var textEl    = document.getElementById('quote-text');
+  var authorEl  = document.getElementById('quote-author');
   if (!container || !textEl || !authorEl) return;
 
-  container.style.opacity = '0';
+  container.style.opacity   = '0';
   container.style.transform = 'scale(0.96)';
 
-  setTimeout(() => {
-    const q = QUOTES[index];
-    textEl.textContent = `"${q.text}"`;
-    authorEl.textContent = `— ${q.author}`;
-    container.style.opacity = '1';
+  setTimeout(function() {
+    var q = QUOTES[index];
+    textEl.textContent   = '"' + q.text + '"';
+    authorEl.textContent = '— ' + q.author;
+    container.style.opacity   = '1';
     container.style.transform = 'scale(1)';
   }, 300);
 }
 
 function initQuotes() {
-  const container = document.getElementById('quote-container');
+  var container = document.getElementById('quote-container');
   if (!container) return;
 
-  // Smooth transition style
   container.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-
   quoteIndex = Math.floor(Math.random() * QUOTES.length);
   renderQuote(quoteIndex);
 
-  const prevBtn  = document.getElementById('prev-quote-btn');
-  const nextBtn  = document.getElementById('next-quote-btn');
-  const randBtn  = document.getElementById('new-quote-btn');
-  const copyBtn  = document.getElementById('copy-quote-btn');
-  const shareBtn = document.getElementById('share-quote-btn');
+  var prevBtn  = document.getElementById('prev-quote-btn');
+  var nextBtn  = document.getElementById('next-quote-btn');
+  var randBtn  = document.getElementById('new-quote-btn');
+  var copyBtn  = document.getElementById('copy-quote-btn');
+  var shareBtn = document.getElementById('share-quote-btn');
 
-  if (prevBtn) prevBtn.addEventListener('click', () => {
-    quoteIndex = (quoteIndex - 1 + QUOTES.length) % QUOTES.length;
-    renderQuote(quoteIndex);
-  });
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function() {
+      quoteIndex = (quoteIndex - 1 + QUOTES.length) % QUOTES.length;
+      renderQuote(quoteIndex);
+    });
+  }
 
-  if (nextBtn) nextBtn.addEventListener('click', () => {
-    quoteIndex = (quoteIndex + 1) % QUOTES.length;
-    renderQuote(quoteIndex);
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() {
+      quoteIndex = (quoteIndex + 1) % QUOTES.length;
+      renderQuote(quoteIndex);
+    });
+  }
 
-  if (randBtn) randBtn.addEventListener('click', () => {
-    let r;
-    do { r = Math.floor(Math.random() * QUOTES.length); } while (r === quoteIndex);
-    quoteIndex = r;
-    renderQuote(quoteIndex);
-  });
+  if (randBtn) {
+    randBtn.addEventListener('click', function() {
+      var r;
+      do { r = Math.floor(Math.random() * QUOTES.length); } while (r === quoteIndex);
+      quoteIndex = r;
+      renderQuote(quoteIndex);
+    });
+  }
 
-  if (copyBtn) copyBtn.addEventListener('click', () => {
-    const q = QUOTES[quoteIndex];
-    const text = `"${q.text}" — ${q.author}`;
-    navigator.clipboard.writeText(text)
-      .then(() => showToast('Quote copied to clipboard!'))
-      .catch(() => showToast('Could not copy — try manually'));
-  });
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function() {
+      var q    = QUOTES[quoteIndex];
+      var text = '"' + q.text + '" — ' + q.author;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+          .then(function() { showToast('Quote copied to clipboard!'); })
+          .catch(function() { showToast('Could not copy — try manually'); });
+      } else {
+        showToast('Copy not supported on this browser');
+      }
+    });
+  }
 
-  if (shareBtn) shareBtn.addEventListener('click', () => {
-    const q = QUOTES[quoteIndex];
-    const text = `"${q.text}" — ${q.author}`;
-    if (navigator.share) {
-      navigator.share({ title: 'The Lit Library', text }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(text)
-        .then(() => showToast('Quote copied to share!'))
-        .catch(() => showToast('Sharing not supported on this browser'));
-    }
-  });
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      var q    = QUOTES[quoteIndex];
+      var text = '"' + q.text + '" — ' + q.author;
+      if (navigator.share) {
+        navigator.share({ title: 'The Lit Library', text: text }).catch(function() {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+          .then(function() { showToast('Quote copied to share!'); })
+          .catch(function() {});
+      } else {
+        showToast('Sharing not supported on this browser');
+      }
+    });
+  }
 }
 
 // ============================================================
@@ -479,44 +504,48 @@ function initQuotes() {
 
 function applyDarkMode(isDark) {
   document.body.classList.toggle('dark-mode', isDark);
-  const btn = document.getElementById('dark-toggle');
-  if (btn) btn.textContent = isDark ? '☀️' : '🌙';
-  btn && (btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode'));
+  var btn = document.getElementById('dark-toggle');
+  if (btn) {
+    btn.textContent = isDark ? '☀️' : '🌙';
+    btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
 }
 
 function initDarkMode() {
-  const btn = document.getElementById('dark-toggle');
+  var btn = document.getElementById('dark-toggle');
   if (!btn) return;
 
-  const saved = lsGet('litlibrary-dark');
+  var saved = lsGet('litlibrary-dark');
   applyDarkMode(!!saved);
 
-  btn.addEventListener('click', () => {
-    const isDark = !document.body.classList.contains('dark-mode');
+  btn.addEventListener('click', function() {
+    var isDark = !document.body.classList.contains('dark-mode');
     applyDarkMode(isDark);
-    lsSet('litlibrary-dark', isDark ? true : null);
-    if (!isDark) localStorage.removeItem('litlibrary-dark');
+    if (isDark) {
+      lsSet('litlibrary-dark', true);
+    } else {
+      localStorage.removeItem('litlibrary-dark');
+    }
   });
 }
 
 // ============================================================
-// NAVIGATION — hamburger, scroll, active link, sticky
+// NAVIGATION
 // ============================================================
 
 function initNav() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('nav-links');
+  var hamburger = document.getElementById('hamburger');
+  var navLinks  = document.getElementById('nav-links');
 
   if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
+    hamburger.addEventListener('click', function() {
+      var isOpen = navLinks.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close on link click (mobile)
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
         navLinks.classList.remove('open');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
@@ -524,20 +553,28 @@ function initNav() {
     });
   }
 
-  // Sticky nav shrink on scroll
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
+  // Sticky nav shrink
+  window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 }
 
 // ============================================================
-// SCROLL ANIMATIONS (Intersection Observer)
+// SCROLL ANIMATIONS
 // ============================================================
 
 function initScrollAnimations() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: just show everything
+    document.querySelectorAll('.fade-in, .slide-up').forEach(function(el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
@@ -545,39 +582,43 @@ function initScrollAnimations() {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('.fade-in, .slide-up').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in, .slide-up').forEach(function(el) {
+    observer.observe(el);
+  });
 }
 
 // ============================================================
-// BACK TO TOP BUTTON
+// BACK TO TOP
 // ============================================================
 
 function initBackToTop() {
-  const btn = document.getElementById('back-to-top');
-  const footerBtn = document.getElementById('footer-scroll-top');
+  var btn       = document.getElementById('back-to-top');
+  var footerBtn = document.getElementById('footer-scroll-top');
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-  if (btn) btn.addEventListener('click', scrollToTop);
+  if (btn)       btn.addEventListener('click', scrollToTop);
   if (footerBtn) footerBtn.addEventListener('click', scrollToTop);
 
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', function() {
     if (btn) btn.classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
 }
 
 // ============================================================
-// READING LIST (Local Storage)
+// READING LIST
 // ============================================================
 
-let readingList = lsGet('litlibrary-rl') || [];
+var readingList = lsGet('litlibrary-rl') || [];
 
 function saveReadingList() {
   lsSet('litlibrary-rl', readingList);
 }
 
 function isInReadingList(id) {
-  return readingList.some(b => b.id === id);
+  return readingList.some(function(b) { return b.id === id; });
 }
 
 function addToReadingList(book) {
@@ -585,34 +626,33 @@ function addToReadingList(book) {
     readingList.push({ id: book.id, title: book.title, author: book.author, img: book.img });
     saveReadingList();
     updateRLUI();
-    showToast(`"${book.title}" added to your reading list!`);
+    showToast('"' + book.title + '" added to your reading list!');
   } else {
     removeFromReadingList(book.id);
   }
 }
 
 function removeFromReadingList(id) {
-  const book = readingList.find(b => b.id === id);
-  readingList = readingList.filter(b => b.id !== id);
+  var book = readingList.find(function(b) { return b.id === id; });
+  readingList = readingList.filter(function(b) { return b.id !== id; });
   saveReadingList();
   updateRLUI();
-  if (book) showToast(`"${book.title}" removed from reading list`);
-  // Update card button if on books page
+  if (book) showToast('"' + book.title + '" removed from reading list');
   updateBookCardRLButton(id);
 }
 
 function updateBookCardRLButton(id) {
-  const btn = document.querySelector(`.add-rl-btn[data-id="${id}"]`);
+  var btn = document.querySelector('.add-rl-btn[data-id="' + id + '"]');
   if (btn) {
-    const inList = isInReadingList(id);
+    var inList = isInReadingList(id);
     btn.textContent = inList ? '✓ Listed' : '+ List';
     btn.classList.toggle('in-list', inList);
   }
 }
 
 function updateRLUI() {
-  const listEl  = document.getElementById('rl-list');
-  const countEl = document.getElementById('rl-count');
+  var listEl  = document.getElementById('rl-list');
+  var countEl = document.getElementById('rl-count');
 
   if (countEl) {
     countEl.textContent = readingList.length;
@@ -626,35 +666,37 @@ function updateRLUI() {
     return;
   }
 
-  listEl.innerHTML = readingList.map(b => `
-    <div class="reading-list-item">
-      <img src="${b.img}" alt="${b.title}" loading="lazy">
-      <div class="rl-item-info">
-        <strong>${b.title}</strong>
-        <span>${b.author}</span>
-      </div>
-      <button class="rl-remove" data-id="${b.id}" aria-label="Remove ${b.title} from reading list">✕</button>
-    </div>
-  `).join('');
+  listEl.innerHTML = readingList.map(function(b) {
+    return '<div class="reading-list-item">' +
+      '<img src="' + b.img + '" alt="' + b.title + '" loading="lazy">' +
+      '<div class="rl-item-info">' +
+        '<strong>' + b.title + '</strong>' +
+        '<span>' + b.author + '</span>' +
+      '</div>' +
+      '<button class="rl-remove" data-id="' + b.id + '" aria-label="Remove ' + b.title + ' from reading list">✕</button>' +
+    '</div>';
+  }).join('');
 
-  listEl.querySelectorAll('.rl-remove').forEach(btn => {
-    btn.addEventListener('click', () => removeFromReadingList(Number(btn.dataset.id)));
+  listEl.querySelectorAll('.rl-remove').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      removeFromReadingList(Number(btn.dataset.id));
+    });
   });
 }
 
 function initReadingListPanel() {
-  const toggleBtn = document.getElementById('rl-toggle-btn');
-  const panel     = document.getElementById('reading-list-panel');
-  const closeBtn  = document.getElementById('rl-close');
+  var toggleBtn = document.getElementById('rl-toggle-btn');
+  var panel     = document.getElementById('reading-list-panel');
+  var closeBtn  = document.getElementById('rl-close');
 
   if (toggleBtn && panel) {
-    toggleBtn.addEventListener('click', () => {
+    toggleBtn.addEventListener('click', function() {
       panel.classList.toggle('open');
     });
   }
 
   if (closeBtn && panel) {
-    closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', function() {
       panel.classList.remove('open');
     });
   }
@@ -663,48 +705,50 @@ function initReadingListPanel() {
 }
 
 // ============================================================
-// FAVORITES (Local Storage)
+// FAVORITES
 // ============================================================
 
-let favorites = lsGet('litlibrary-favs') || [];
+var favorites = lsGet('litlibrary-favs') || [];
 
 function saveFavorites() {
   lsSet('litlibrary-favs', favorites);
 }
 
 function isFavorite(id) {
-  return favorites.includes(id);
+  return favorites.indexOf(id) !== -1;
 }
 
 function toggleFavorite(id, title) {
   if (isFavorite(id)) {
-    favorites = favorites.filter(f => f !== id);
+    favorites = favorites.filter(function(f) { return f !== id; });
     saveFavorites();
-    showToast(`Removed "${title}" from favorites`);
+    showToast('Removed "' + title + '" from favorites');
   } else {
     favorites.push(id);
     saveFavorites();
-    showToast(`❤️ "${title}" added to favorites!`);
+    showToast('❤️ "' + title + '" added to favorites!');
   }
-  // Update heart icon on card
-  const heartBtn = document.querySelector(`.heart-btn[data-id="${id}"]`);
+
+  // Update heart on card
+  var heartBtn = document.querySelector('.heart-btn[data-id="' + id + '"]');
   if (heartBtn) {
     heartBtn.classList.toggle('favorited', isFavorite(id));
     heartBtn.textContent = isFavorite(id) ? '♥' : '♡';
-    heartBtn.setAttribute('aria-label', isFavorite(id) ? `Remove ${title} from favorites` : `Add ${title} to favorites`);
+    heartBtn.setAttribute('aria-label', (isFavorite(id) ? 'Remove ' : 'Add ') + title + (isFavorite(id) ? ' from' : ' to') + ' favorites');
   }
+
   // Update modal button if open
-  const modalFavBtn = document.getElementById('modal-fav-btn');
+  var modalFavBtn = document.getElementById('modal-fav-btn');
   if (modalFavBtn && Number(modalFavBtn.dataset.id) === id) {
     updateModalFavBtn(id, title);
   }
 }
 
 function updateModalFavBtn(id, title) {
-  const btn = document.getElementById('modal-fav-btn');
+  var btn = document.getElementById('modal-fav-btn');
   if (!btn) return;
   btn.dataset.id = id;
-  const fav = isFavorite(id);
+  var fav = isFavorite(id);
   btn.textContent = fav ? '♥ Favorited' : '♡ Favorite';
   btn.style.background = fav ? '#c0392b' : '';
 }
@@ -714,26 +758,26 @@ function updateModalFavBtn(id, title) {
 // ============================================================
 
 function openModal(book) {
-  const overlay = document.getElementById('book-modal');
+  var overlay = document.getElementById('book-modal');
   if (!overlay) return;
 
-  document.getElementById('modal-cover').src    = book.img;
-  document.getElementById('modal-cover').alt    = `Cover of ${book.title}`;
+  document.getElementById('modal-cover').src         = book.img;
+  document.getElementById('modal-cover').alt         = 'Cover of ' + book.title;
   document.getElementById('modal-title').textContent  = book.title;
   document.getElementById('modal-author').textContent = book.author;
   document.getElementById('modal-genre').textContent  = book.genre;
   document.getElementById('modal-stars').textContent  = starsHTML(book.rating);
-  document.getElementById('modal-stars').setAttribute('aria-label', `Rating: ${book.rating} out of 5`);
+  document.getElementById('modal-stars').setAttribute('aria-label', 'Rating: ' + book.rating + ' out of 5');
   document.getElementById('modal-desc').textContent   = book.fullDesc;
   document.getElementById('modal-quote').textContent  = book.quote;
   document.getElementById('modal-why').textContent    = book.why;
 
   // Reading list button
-  const rlBtn = document.getElementById('modal-rl-btn');
+  var rlBtn = document.getElementById('modal-rl-btn');
   if (rlBtn) {
-    rlBtn.dataset.id = book.id;
+    rlBtn.dataset.id  = book.id;
     rlBtn.textContent = isInReadingList(book.id) ? '✓ In Reading List' : '+ Reading List';
-    rlBtn.onclick = () => {
+    rlBtn.onclick = function() {
       addToReadingList(book);
       rlBtn.textContent = isInReadingList(book.id) ? '✓ In Reading List' : '+ Reading List';
     };
@@ -741,9 +785,9 @@ function openModal(book) {
 
   // Favorites button
   updateModalFavBtn(book.id, book.title);
-  const modalFavBtn = document.getElementById('modal-fav-btn');
+  var modalFavBtn = document.getElementById('modal-fav-btn');
   if (modalFavBtn) {
-    modalFavBtn.onclick = () => {
+    modalFavBtn.onclick = function() {
       toggleFavorite(book.id, book.title);
       updateModalFavBtn(book.id, book.title);
     };
@@ -752,13 +796,12 @@ function openModal(book) {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  // Focus management
-  const closeBtn = document.getElementById('modal-close');
-  if (closeBtn) setTimeout(() => closeBtn.focus(), 50);
+  var closeBtn = document.getElementById('modal-close');
+  if (closeBtn) setTimeout(function() { closeBtn.focus(); }, 50);
 }
 
 function closeModal() {
-  const overlay = document.getElementById('book-modal');
+  var overlay = document.getElementById('book-modal');
   if (overlay) {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
@@ -766,17 +809,17 @@ function closeModal() {
 }
 
 function initModal() {
-  const overlay = document.getElementById('book-modal');
-  const closeBtn = document.getElementById('modal-close');
+  var overlay  = document.getElementById('book-modal');
+  var closeBtn = document.getElementById('modal-close');
   if (!overlay) return;
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-  overlay.addEventListener('click', (e) => {
+  overlay.addEventListener('click', function(e) {
     if (e.target === overlay) closeModal();
   });
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
 }
@@ -785,100 +828,94 @@ function initModal() {
 // BOOKS PAGE — render, search, filter
 // ============================================================
 
-let activeFilter = 'all';
-let searchQuery  = '';
+var activeFilter = 'all';
+var searchQuery  = '';
 
 function renderBooks() {
-  const grid = document.getElementById('books-grid');
-  const noResults = document.getElementById('no-results');
+  var grid      = document.getElementById('books-grid');
+  var noResults = document.getElementById('no-results');
   if (!grid) return;
 
-  const q = searchQuery.trim().toLowerCase();
+  var q = searchQuery.trim().toLowerCase();
 
-  const filtered = BOOKS.filter(book => {
-    const matchesFilter = activeFilter === 'all' || book.filterGenres.includes(activeFilter);
-    const matchesSearch = !q ||
-      book.title.toLowerCase().includes(q) ||
-      book.author.toLowerCase().includes(q) ||
-      book.genre.toLowerCase().includes(q) ||
-      book.filterGenres.some(g => g.toLowerCase().includes(q));
+  var filtered = BOOKS.filter(function(book) {
+    var matchesFilter = activeFilter === 'all' || book.filterGenres.indexOf(activeFilter) !== -1;
+    var matchesSearch = !q ||
+      book.title.toLowerCase().indexOf(q)  !== -1 ||
+      book.author.toLowerCase().indexOf(q) !== -1 ||
+      book.genre.toLowerCase().indexOf(q)  !== -1 ||
+      book.filterGenres.some(function(g) { return g.toLowerCase().indexOf(q) !== -1; });
     return matchesFilter && matchesSearch;
   });
 
   if (noResults) noResults.style.display = filtered.length === 0 ? 'block' : 'none';
 
-  grid.innerHTML = filtered.map(book => `
-    <article class="book-card" data-id="${book.id}" tabindex="0" role="button" aria-label="${book.title} by ${book.author}">
-      <!-- Favorite heart -->
-      <button
-        class="heart-btn ${isFavorite(book.id) ? 'favorited' : ''}"
-        data-id="${book.id}"
-        aria-label="${isFavorite(book.id) ? 'Remove from favorites' : 'Add to favorites'}: ${book.title}"
-        title="${isFavorite(book.id) ? 'Remove from favorites' : 'Add to favorites'}"
-      >${isFavorite(book.id) ? '♥' : '♡'}</button>
+  grid.innerHTML = filtered.map(function(book) {
+    var favClass = isFavorite(book.id) ? 'favorited' : '';
+    var favIcon  = isFavorite(book.id) ? '♥' : '♡';
+    var inList   = isInReadingList(book.id);
 
-      <img src="${book.img}" alt="Cover of ${book.title}" loading="lazy">
+    return '<article class="book-card" data-id="' + book.id + '" tabindex="0" role="button" aria-label="' + book.title + ' by ' + book.author + '">' +
+      '<button class="heart-btn ' + favClass + '" data-id="' + book.id + '" aria-label="' + (isFavorite(book.id) ? 'Remove from favorites' : 'Add to favorites') + ': ' + book.title + '">' + favIcon + '</button>' +
+      '<img src="' + book.img + '" alt="Cover of ' + book.title + '" loading="lazy">' +
+      '<div class="book-card-three">' +
+        '<h3>' + book.title + '</h3>' +
+        '<p class="author">' + book.author + '</p>' +
+        '<div class="card-stars" aria-label="Rating: ' + book.rating + ' out of 5">' + starsHTML(book.rating) + '</div>' +
+        '<span class="genre">' + book.genre + '</span>' +
+        '<p class="desc">' + book.desc + '</p>' +
+        '<div class="card-actions">' +
+          '<button class="read-more-btn" data-id="' + book.id + '" aria-label="Read more about ' + book.title + '">Read More</button>' +
+          '<button class="add-rl-btn ' + (inList ? 'in-list' : '') + '" data-id="' + book.id + '">' + (inList ? '✓ Listed' : '+ List') + '</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }).join('');
 
-      <div class="book-card-three">
-        <h3>${book.title}</h3>
-        <p class="author">${book.author}</p>
-        <div class="card-stars" aria-label="Rating: ${book.rating} out of 5">${starsHTML(book.rating)}</div>
-        <span class="genre">${book.genre}</span>
-        <p class="desc">${book.desc}</p>
-        <div class="card-actions">
-          <button class="read-more-btn" data-id="${book.id}" aria-label="Read more about ${book.title}">Read More</button>
-          <button
-            class="add-rl-btn ${isInReadingList(book.id) ? 'in-list' : ''}"
-            data-id="${book.id}"
-            aria-label="${isInReadingList(book.id) ? 'Remove from reading list' : 'Add to reading list'}: ${book.title}"
-          >${isInReadingList(book.id) ? '✓ Listed' : '+ List'}</button>
-        </div>
-      </div>
-    </article>
-  `).join('');
-
-  // Attach events to newly rendered cards
-  grid.querySelectorAll('.read-more-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Read More → modal
+  grid.querySelectorAll('.read-more-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      const book = BOOKS.find(b => b.id === Number(btn.dataset.id));
+      var book = BOOKS.find(function(b) { return b.id === Number(btn.dataset.id); });
       if (book) openModal(book);
     });
   });
 
-  grid.querySelectorAll('.add-rl-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Reading List toggle
+  grid.querySelectorAll('.add-rl-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      const book = BOOKS.find(b => b.id === Number(btn.dataset.id));
+      var book = BOOKS.find(function(b) { return b.id === Number(btn.dataset.id); });
       if (book) {
         addToReadingList(book);
-        btn.textContent = isInReadingList(book.id) ? '✓ Listed' : '+ List';
-        btn.classList.toggle('in-list', isInReadingList(book.id));
+        var inList = isInReadingList(book.id);
+        btn.textContent = inList ? '✓ Listed' : '+ List';
+        btn.classList.toggle('in-list', inList);
       }
     });
   });
 
-  grid.querySelectorAll('.heart-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Heart → favorites
+  grid.querySelectorAll('.heart-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      const book = BOOKS.find(b => b.id === Number(btn.dataset.id));
+      var book = BOOKS.find(function(b) { return b.id === Number(btn.dataset.id); });
       if (book) toggleFavorite(book.id, book.title);
     });
   });
 
-  // Card click → modal
-  grid.querySelectorAll('.book-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      // Don't open modal if a button inside was clicked
+  // Card click → modal (not on button click)
+  grid.querySelectorAll('.book-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
       if (e.target.closest('button')) return;
-      const book = BOOKS.find(b => b.id === Number(card.dataset.id));
+      var book = BOOKS.find(function(b) { return b.id === Number(card.dataset.id); });
       if (book) openModal(book);
     });
-    // Keyboard support
-    card.addEventListener('keydown', (e) => {
+
+    card.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        const book = BOOKS.find(b => b.id === Number(card.dataset.id));
+        var book = BOOKS.find(function(b) { return b.id === Number(card.dataset.id); });
         if (book) openModal(book);
       }
     });
@@ -886,24 +923,24 @@ function renderBooks() {
 }
 
 function initBooksPage() {
-  const grid = document.getElementById('books-grid');
+  var grid = document.getElementById('books-grid');
   if (!grid) return;
 
   renderBooks();
 
-  // Search input
-  const searchInput = document.getElementById('book-search');
+  var searchInput = document.getElementById('book-search');
   if (searchInput) {
-    searchInput.addEventListener('input', () => {
+    searchInput.addEventListener('input', function() {
       searchQuery = searchInput.value;
       renderBooks();
     });
   }
 
-  // Filter buttons
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
       btn.classList.add('active');
       activeFilter = btn.dataset.filter;
       renderBooks();
@@ -916,55 +953,44 @@ function initBooksPage() {
 // ============================================================
 
 function initContactForm() {
-  const form       = document.getElementById('contactForm');
-  const successMsg = document.getElementById('form-success');
-  const errorMsg   = document.getElementById('form-error');
+  var form       = document.getElementById('contactForm');
+  var successMsg = document.getElementById('form-success');
+  var errorMsg   = document.getElementById('form-error');
   if (!form) return;
 
-  const inputs = form.querySelectorAll('input, textarea');
+  var inputs = form.querySelectorAll('input, textarea');
 
-  // Focus/blur styling
-  inputs.forEach(input => {
-    input.addEventListener('focus', () => {
-      input.style.borderColor = 'var(--golden)';
-      input.style.boxShadow = '0 0 0 3px rgba(184,139,74,0.12)';
+  inputs.forEach(function(input) {
+    input.addEventListener('focus', function() {
+      input.style.borderColor = '#B88B4A';
+      input.style.boxShadow   = '0 0 0 3px rgba(184,139,74,0.12)';
     });
-    input.addEventListener('blur', () => {
+    input.addEventListener('blur', function() {
       if (!input.value.trim()) {
         input.style.borderColor = '#d4c0a4';
-        input.style.boxShadow = 'none';
-      } else {
-        input.style.borderColor = 'var(--golden)';
-      }
-    });
-    // Clear error border on typing
-    input.addEventListener('input', () => {
-      if (input.style.borderColor === '#e74c3c' || input.style.borderColor === 'rgb(231, 76, 60)') {
-        input.style.borderColor = 'var(--golden)';
+        input.style.boxShadow   = 'none';
       }
     });
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Hide previous messages
     if (successMsg) successMsg.style.display = 'none';
     if (errorMsg)   errorMsg.style.display   = 'none';
 
-    // Validate required fields
-    let valid = true;
-    const required = form.querySelectorAll('[required]');
-    required.forEach(input => {
+    var valid    = true;
+    var required = form.querySelectorAll('[required]');
+
+    required.forEach(function(input) {
       if (!input.value.trim()) {
         input.style.borderColor = '#e74c3c';
-        input.style.boxShadow = '0 0 0 3px rgba(231,76,60,0.12)';
+        input.style.boxShadow   = '0 0 0 3px rgba(231,76,60,0.12)';
         valid = false;
       }
     });
 
-    // Email format check
-    const emailInput = form.querySelector('[type="email"]');
+    var emailInput = form.querySelector('[type="email"]');
     if (emailInput && emailInput.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
       emailInput.style.borderColor = '#e74c3c';
       valid = false;
@@ -978,19 +1004,18 @@ function initContactForm() {
       return;
     }
 
-    // Success
     if (successMsg) {
       successMsg.style.display = 'block';
       successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+
     form.reset();
-    inputs.forEach(input => {
+    inputs.forEach(function(input) {
       input.style.borderColor = '#d4c0a4';
-      input.style.boxShadow = 'none';
+      input.style.boxShadow   = 'none';
     });
 
-    // Auto-hide success message
-    setTimeout(() => {
+    setTimeout(function() {
       if (successMsg) successMsg.style.display = 'none';
     }, 6000);
   });
@@ -1001,18 +1026,18 @@ function initContactForm() {
 // ============================================================
 
 function initFAQ() {
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const btn = item.querySelector('.faq-question');
+  document.querySelectorAll('.faq-item').forEach(function(item) {
+    var btn = item.querySelector('.faq-question');
     if (!btn) return;
 
-    btn.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
+    btn.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
 
-      // Close all other items
-      document.querySelectorAll('.faq-item.open').forEach(other => {
+      document.querySelectorAll('.faq-item.open').forEach(function(other) {
         if (other !== item) {
           other.classList.remove('open');
-          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          var otherBtn = other.querySelector('.faq-question');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
         }
       });
 
@@ -1029,10 +1054,10 @@ function initFAQ() {
 function initLazyLoad() {
   if (!('IntersectionObserver' in window)) return;
 
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
+  var imageObserver = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        const img = entry.target;
+        var img = entry.target;
         if (img.dataset.src) {
           img.src = img.dataset.src;
           img.removeAttribute('data-src');
@@ -1043,19 +1068,21 @@ function initLazyLoad() {
     });
   });
 
-  document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+  document.querySelectorAll('img[data-src]').forEach(function(img) {
+    imageObserver.observe(img);
+  });
 }
 
 // ============================================================
-// SMOOTH SCROLL for anchor links
+// SMOOTH SCROLL
 // ============================================================
 
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
+      var href   = this.getAttribute('href');
       if (href === '#') return;
-      const target = document.querySelector(href);
+      var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1065,10 +1092,10 @@ function initSmoothScroll() {
 }
 
 // ============================================================
-// INIT — run everything on DOMContentLoaded
+// INIT
 // ============================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   initDarkMode();
   initNav();
   initReadingListPanel();
@@ -1082,5 +1109,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initLazyLoad();
   initSmoothScroll();
 
-  console.log('✓ The Lit Library — loaded successfully');
+  console.log('The Lit Library - loaded successfully');
 });
