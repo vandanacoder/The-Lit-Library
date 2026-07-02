@@ -1255,6 +1255,23 @@ button:hover,
   color: var(--golden-light);
 }
 
+.footer-credit {
+  font-size: 0.8rem;
+  color: var(--warm-taupe);
+  margin-top: 0.3rem;
+  font-family: 'Inter', sans-serif;
+}
+.footer-credit strong {
+  color: var(--golden);
+  font-weight: 600;
+}
+body.dark-mode .footer-credit {
+  color: var(--dm-text-muted);
+}
+body.dark-mode .footer-credit strong {
+  color: var(--dm-golden);
+}
+
 /* ============================================================
    BOOKS PAGE
    ============================================================ */
